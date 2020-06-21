@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome to COVOID Dashboard</h1>
+
+   <div></div>
+<div th:each="stat: ${stateWiseData}"></div>
+<table>
+    This is the table ${stateWiseData}
+    <tr th:each="stat: ${home}">
+        This is the loop
+        <td th:text="${stat.id}" />
+        <td th:text="${stat.name}" />
+        <td th:text="${stat.activeCasesCount}" />
+        <td th:text="${stat.resolvedCasesCount}" />
+        <td th:text="${stat.deathCasesCount}" />
+        <td th:text="${stat.confirmedCasesCount}" />
+        <td th:text="${stat.totalCasesCount}" />
+    </tr>
+</table>
+
+</body>
+</html>
