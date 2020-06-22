@@ -5,17 +5,19 @@
     <title>Login</title>
 </head>
 <body>
-<h1>Login Form</h1>
+<h1>Register Form</h1>
 
 
-<form th:action="@{/login}" th:object="${loginForm}" method="post">
+<form th:action="@{/register}" th:object="${registerForm}" method="post">
     <label for="userName">Username</label>
     <input type="text" id="userName" name="userName" autofocus="autofocus"/>
 
     <label for="password">Password</label>
     <input type="password" id="password" name="password"/>
+    <label for="confirmPassword">Password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword"/>
     <br/>
-    <input type="submit" value="Log In"/>
+    <input type="submit" value="Register"/>
 
 </form>
 </body>

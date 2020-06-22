@@ -78,7 +78,6 @@ public class Scraper {
                 }
 
             }
-
         }
         return statsList;
     }

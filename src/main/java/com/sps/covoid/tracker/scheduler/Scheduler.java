@@ -1,6 +1,8 @@
 package com.sps.covoid.tracker.scheduler;
 
 import com.sps.covoid.tracker.entities.StateStats;
+import com.sps.covoid.tracker.entities.User;
+import com.sps.covoid.tracker.repository.UserRepository;
 import com.sps.covoid.tracker.scraper.Scraper;
 import com.sps.covoid.tracker.services.EntityService;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,6 +34,12 @@ public class Scheduler {
     private final EntityService entityService;
 
     /**
+     * User repository
+     */
+    @Autowired
+    private UserRepository userRepository;
+
+    /**
      * The constant THOUSAND_SECONDS.
      */
     public static final int THOUSAND_SECONDS = 1000000;
@@ -48,10 +57,16 @@ public class Scheduler {
         List<StateStats> sateWiseData = null;
         try {
              sateWiseData = scraper.getCovoidData();
-
         } catch (final IOException e) {
             LOGGER.error("error occurred while scraping data", e);
         }
-        entityService.persistCoronaData(sateWiseData);
+        if (null != sateWiseData) {
+            entityService.persistCoronaData(sateWiseData);
+        }
+    }
+
+    @PostConstruct
+    public void init(){
+        userRepository.save(new User("admin", "admin"));
     }
 }

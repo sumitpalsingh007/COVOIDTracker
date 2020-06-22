@@ -1,6 +1,8 @@
 package com.sps.covoid.tracker.controller;
 
 import com.sps.covoid.tracker.form.LoginForm;
+import com.sps.covoid.tracker.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
+    @Autowired
+    UserRepository userRepository;
+
     /**
      * Login boolean.
      *
@@ -21,11 +26,11 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@ModelAttribute(name = "loginForm")final LoginForm loginForm,
                         final Model model) {
-        if ("admin".equals(loginForm.getUserName())
-        && "admin".equals(loginForm.getPassword())) {
+        if (null != userRepository.getIdForExistingUser(
+                loginForm.getUserName(), loginForm.getPassword())) {
             return "home";
         }
-        model.addAttribute("invalidCredentails", true);
+        model.addAttribute("invalidCredentials", true);
         return "login";
     }
 
