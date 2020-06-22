@@ -60,7 +60,7 @@ public class Scheduler {
         } catch (final IOException e) {
             LOGGER.error("error occurred while scraping data", e);
         }
-        if (null != sateWiseData) {
+        if (null != sateWiseData && !sateWiseData.isEmpty()) {
             entityService.persistCoronaData(sateWiseData);
         }
     }

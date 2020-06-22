@@ -76,7 +76,6 @@ public class Scraper {
                     }
                     statsList.add(stat);
                 }
-
             }
         }
         return statsList;
