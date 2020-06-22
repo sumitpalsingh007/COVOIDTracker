@@ -18,8 +18,11 @@ import org.thymeleaf.util.StringUtils;
 @Controller
 public class RegisterController {
 
-    @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+
+    public RegisterController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Register.

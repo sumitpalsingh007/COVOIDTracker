@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
 
     /**
-     * Gets login form.
+     * Gets home page.
      *
      * @param request the request
-     * @return the login form
+     * @return the home page
      */
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String getLoginForm(HttpServletRequest request) {
+    public String getHome(HttpServletRequest request) {
         if (request.getCookies() != null) {
             for (int i = 0; i < request.getCookies().length; i++) {
                 if ("login".equals(request.getCookies()[i].getName())
