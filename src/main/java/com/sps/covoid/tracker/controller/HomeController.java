@@ -1,30 +1,36 @@
 package com.sps.covoid.tracker.controller;
 
-import com.sps.covoid.tracker.services.EntityService;
+import com.sps.covoid.tracker.form.LoginForm;
+import com.sps.covoid.tracker.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The type Home controller.
+ */
 @Controller
-public class StateWiseCovoidStatsController {
+public class HomeController {
 
-    final EntityService entityService;
-
-    public StateWiseCovoidStatsController(final EntityService entityService) {
-        this.entityService = entityService;
-    }
-
-    @RequestMapping(value = "/stateWiseData", method = RequestMethod.GET)
-    public String messages(final Model model, final HttpServletRequest request) {
+    /**
+     * Gets login form.
+     *
+     * @param request the request
+     * @return the login form
+     */
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String getLoginForm(HttpServletRequest request) {
         if (request.getCookies() != null) {
             for (int i = 0; i < request.getCookies().length; i++) {
                 if ("login".equals(request.getCookies()[i].getName())
                         && "true".equals(request.getCookies()[i].getValue())) {
-                    model.addAttribute("stateWiseData", entityService.getStateWiseCoronaData());
                     return "home";
                 }
             }
