@@ -1,7 +1,9 @@
 package com.sps.covoid.tracker.services.impl;
 
 import com.sps.covoid.tracker.entities.StateStats;
+import com.sps.covoid.tracker.repository.StatsRepository;
 import com.sps.covoid.tracker.services.EntityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -11,18 +13,21 @@ import java.util.List;
 /**
  * The type Entity service.
  */
-@Service("entityService")
+@Service
 public class EntityServiceImpl implements EntityService {
 
     private final EntityManager entityManager;
+
+    private final StatsRepository statsRepository;
 
     /**
      * Instantiates a new Entity service.
      *
      * @param entityManager the entity manager
      */
-    public EntityServiceImpl(final EntityManager entityManager) {
+    public EntityServiceImpl(final EntityManager entityManager, final StatsRepository statsRepository) {
         this.entityManager = entityManager;
+        this.statsRepository = statsRepository;
     }
 
     /**
@@ -41,7 +46,6 @@ public class EntityServiceImpl implements EntityService {
      */
     @Override
     public List<StateStats> getStateWiseCoronaData() {
-        return entityManager.createQuery(
-                "select stat from StateStats stat").getResultList();
+        return statsRepository.getAllStats();
     }
 }

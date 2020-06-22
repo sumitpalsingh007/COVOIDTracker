@@ -26,9 +26,6 @@ public class StateStats {
     @Column(name = "DEATH_CASE_COUNT")
     private Long deathCasesCount;
 
-    @Column(name = "CONFIRMED_CASES_COUNT")
-    private Long confirmedCasesCount;
-
     @Column(name = "TOTAL_CASES_COUNT")
     private Long totalCasesCount;
 
@@ -120,24 +117,6 @@ public class StateStats {
      */
     public void setDeathCasesCount(final Long deathCasesCount) {
         this.deathCasesCount = deathCasesCount;
-    }
-
-    /**
-     * Gets confirmed cases count.
-     *
-     * @return the confirmed cases count
-     */
-    public Long getConfirmedCasesCount() {
-        return confirmedCasesCount;
-    }
-
-    /**
-     * Sets confirmed cases count.
-     *
-     * @param confirmedCasesCount the confirmed cases count
-     */
-    public void setConfirmedCasesCount(final Long confirmedCasesCount) {
-        this.confirmedCasesCount = confirmedCasesCount;
     }
 
     /**
